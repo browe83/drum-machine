@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from '@material-ui/core';
+import DrumMachine from './components/DrumMachine';
+import Display from './components/Display';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  container: {
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: '#a9a9a9',
+  }
+});
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   <Container maxWidth='sm' className={classes.container}> 
+    <div style={{display: 'flex', alignItems: 'center', border: '10px solid orange'}}>
+      <DrumMachine />
+      <Display />
     </div>
-  );
+   </Container>
+  )
 }
 
 export default App;
