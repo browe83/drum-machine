@@ -4,20 +4,24 @@ import DrumMachine from './components/DrumMachine';
 import Display from './components/Display';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   container: {
     height: '100vh',
     display: 'flex',
     alignItems: 'center',
     backgroundColor: '#a9a9a9',
+    
   },
   border: {
      display: 'flex', 
      alignItems: 'center', 
      border: '10px solid orange', 
      borderRadius: '4px',
+     [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+    }
   },
-});
+}));
 
 function App() {
   const classes = useStyles();
