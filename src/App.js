@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Container } from '@material-ui/core';
 import DrumMachine from './components/DrumMachine';
 import Display from './components/Display';
@@ -9,17 +10,39 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     backgroundColor: '#a9a9a9',
-  }
+  },
+  border: {
+     display: 'flex', 
+     alignItems: 'center', 
+     border: '10px solid orange', 
+     borderRadius: '4px',
+  },
 });
 
 function App() {
   const classes = useStyles();
+  const [power, setPower] = useState(false);
+  const [display, setDisplay] = useState('');
+  const [volume, setVolume] = useState(50);
+
+  const togglePower = () => {
+    const currentState = power;
+    setPower(!currentState);
+  }
+
+  const handleChange = (value) => {
+    setVolume(value);
+  }
 
   return (
-   <Container maxWidth='sm' className={classes.container}> 
-    <div style={{display: 'flex', alignItems: 'center', border: '10px solid orange'}}>
-      <DrumMachine />
-      <Display />
+   <Container id='drum-machine' maxWidth='sm' className={classes.container}> 
+    <div className={classes.border}>
+      <DrumMachine powerOn={power} setDisplay={setDisplay} volume={volume}/>
+      <Display 
+        display={display} 
+        togglePower={togglePower} 
+        volume={volume} 
+        handleChange={handleChange}/>
     </div>
    </Container>
   )

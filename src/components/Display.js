@@ -16,38 +16,40 @@ const useStyles = makeStyles({
   displayElement: {
     backgroundColor: '#e0e0e0',
     width: '80%',
+    minBlockSize: '30px',
     padding: '10px',
     margin: '10px 0px',
+    borderRadius: '4px'
   }
 })
 
-export default function Display() {
+export default function Display(props) {
   const classes = useStyles();
 
   return (
-    <Container className={classes.display}>
+    <Container id='display' className={classes.display}>
       <FormControlLabel
-        control={<Switch color='primary'/>}
+        control={<Switch color='primary' onChange={props.togglePower}/>}
         label='Power'
       />
-      <Typography  variant='h5' align='center' className={classes.displayElement}>Display Filler</Typography>
+      <Typography  variant='h5' align='center' className={classes.displayElement}>{props.display}</Typography>
       <div className={classes.volume}>
         <Grid container spacing={2}>
           <Grid item>
             <VolumeDown />
           </Grid>
           <Grid item xs>
-            <Slider value={30} aria-labelledby='slider'/>
+            <Slider 
+              value={props.volume} 
+              onChange={(e, val) => props.handleChange(val)}
+              min={0} 
+              max={100}/>
           </Grid>
           <Grid item>
             <VolumeUp />
           </Grid>
         </Grid>
       </div>
-      <FormControlLabel
-        control={<Switch color='primary'/>}
-        label='Bank'
-      />
     </Container>
   )
 }

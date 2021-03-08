@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-const keys = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
+import Pad from './Pad.js';
+import data from '../data';
 
 const useStyles = makeStyles({
   item: {
@@ -15,21 +15,25 @@ const useStyles = makeStyles({
     width: '85%',
     height: '74px',
   },
-});
+  pressed: {
+    backgroundColor: '#ffa500',
+  }
+})
 
-export default function DrumPad(props) {
+export default function DrumMachine({ setDisplay, powerOn, volume }) {
   const classes = useStyles();
-  
+
   return (
     <Grid className={classes.grid} container>
-      {keys.map((k, i) => (
+      {data.map((d, i) => (
         <Grid key={i} item xs={4} className={classes.item}>
-          <Button
-            className={classes.pad} 
-            onClick={() => console.log('clicked!')}
-            variant='contained' 
-            size='large' >{k}
-          </Button>
+         <Pad 
+          classes={classes}
+          powerOn={powerOn} 
+          d={d} 
+          volume={volume} 
+          setDisplay={setDisplay}
+          ></Pad>
         </Grid>
       ))}
     </Grid>
